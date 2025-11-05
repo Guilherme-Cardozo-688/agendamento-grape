@@ -1,0 +1,4 @@
+# Proteger diretório data
+Order allow,deny
+Deny from all
+

@@ -1,0 +1,42 @@
+# Proteção de arquivos sensíveis
+<FilesMatch "^(credentials\.php|google_token\.json|\.env)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Proteção do diretório data
+<DirectoryMatch "^.*/data/">
+    Order allow,deny
+    Deny from all
+</DirectoryMatch>
+
+# Habilitar rewrite engine (se necessário)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    
+    # Redirecionar para index.php se arquivo não existir
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^api/(.*)$ api/$1 [L]
+</IfModule>
+
+# Configurações de segurança
+<IfModule mod_headers.c>
+    # Proteção XSS
+    Header set X-XSS-Protection "1; mode=block"
+    # Prevenir clickjacking
+    Header set X-Frame-Options "SAMEORIGIN"
+    # Prevenir MIME sniffing
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>
+
+# Desabilitar listagem de diretórios
+Options -Indexes
+
+# Configurações PHP (se permitido)
+<IfModule mod_php7.c>
+    php_value upload_max_filesize 10M
+    php_value post_max_size 10M
+</IfModule>
+

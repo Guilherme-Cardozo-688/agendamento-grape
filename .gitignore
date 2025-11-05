@@ -1,0 +1,41 @@
+# Chaves de API e credenciais
+config/credentials.php
+config/.env
+*.env
+.env.local
+.env.production
+
+# Dependências
+vendor/
+node_modules/
+
+# Banco de dados SQLite
+*.db
+*.sqlite
+*.sqlite3
+data/*.db
+
+# Logs
+*.log
+logs/
+
+# Arquivos temporários
+tmp/
+temp/
+*.tmp
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Uploads temporários
+uploads/temp/
+
