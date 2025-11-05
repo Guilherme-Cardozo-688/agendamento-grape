@@ -4,17 +4,17 @@ Sistema de agendamento de espaços para o GrapeTech, permitindo agendamentos pú
 
 ## Funcionalidades
 
-- ✅ Criar e atualizar agendamentos
-- ✅ Visualização em calendário
-- ✅ Painel administrativo para aprovação/rejeição
-- ✅ Interface moderna e responsiva
-- ✅ Validação de limites por espaço:
+- Criar e atualizar agendamentos
+- Visualização em calendário
+- Painel administrativo para aprovação/rejeição
+- Interface moderna e responsiva
+- Validação de limites por espaço:
   - Laboratório IFMaker: máximo 3 agendamentos simultâneos
   - CoWorking: máximo 8 agendamentos simultâneos
   - Sala de Reunião: máximo 1 agendamento simultâneo
-- ✅ Eventos que ocupam todo o espaço (bloqueiam outros agendamentos)
-- ✅ Envio de email quando agendamento é criado/aprovado/rejeitado
-- ✅ Integração com Google Calendar
+- Eventos que ocupam todo o espaço (bloqueiam outros agendamentos)
+- Envio de email quando agendamento é criado/aprovado/rejeitado
+- Integração com Google Calendar
 
 ## Requisitos
 
@@ -52,8 +52,8 @@ Para instruções detalhadas, consulte [INSTALL.md](INSTALL.md).
 
 6. **Acesse o painel admin:**
    - URL: `http://localhost:8000/admin/login.php`
-   - Email: `admin@grapetech.com`
-   - Senha: `admin123` (altere após primeiro acesso!)
+   - Credenciais: Configure em `config/credentials.php`
+   - **IMPORTANTE**: Altere a senha padrão após o primeiro acesso!
 
 ## Uso
 
@@ -62,9 +62,7 @@ Para instruções detalhadas, consulte [INSTALL.md](INSTALL.md).
 
 ### Área Administrativa
 - Acesse `admin/login.php`
-- Credenciais padrão:
-  - Email: `admin@grapetech.com`
-  - Senha: `admin123`
+- Credenciais: Configure em `config/credentials.php`
 - **IMPORTANTE**: Altere a senha padrão após o primeiro acesso!
 
 ## Estrutura do Projeto
@@ -112,11 +110,11 @@ O sistema usa a função `mail()` nativa do PHP. Para usar SMTP (recomendado), v
 
 ## Segurança
 
-- ✅ Senhas hashadas com `password_hash()`
-- ✅ Prepared statements para prevenir SQL injection
-- ✅ Validação de dados de entrada
-- ✅ Proteção contra CSRF (recomendado adicionar tokens)
-- ✅ `.gitignore` configurado para não commitar credenciais
+- Senhas hashadas com `password_hash()`
+- Prepared statements para prevenir SQL injection
+- Validação de dados de entrada
+- Proteção contra CSRF (recomendado adicionar tokens)
+- `.gitignore` configurado para não commitar credenciais
 
 ## Licença
 

@@ -67,13 +67,20 @@ class Database {
             $this->db->exec("ALTER TABLE agendamentos ADD COLUMN email TEXT");
         } catch (PDOException $e) {
         }
+        
+        try {
+            $this->db->exec("ALTER TABLE agendamentos ADD COLUMN motivo_rejeicao TEXT");
+        } catch (PDOException $e) {
+        }
 
         $stmt = $this->db->query("SELECT COUNT(*) FROM usuarios");
         if ($stmt->fetchColumn() == 0) {
-            $senhaHash = password_hash('admin123', PASSWORD_DEFAULT);
+            $emailAdmin = defined('ADMIN_EMAIL') ? ADMIN_EMAIL : 'incubadora.grapetech@gmail.com';
+            $senhaAdmin = defined('ADMIN_PASSWORD') ? ADMIN_PASSWORD : 'ALTERE_ESTA_SENHA';
+            $senhaHash = password_hash($senhaAdmin, PASSWORD_DEFAULT);
             $this->db->exec("
                 INSERT INTO usuarios (email, senha, nome) 
-                VALUES ('admin@grapetech.com', '$senhaHash', 'Administrador')
+                VALUES ('$emailAdmin', '$senhaHash', 'Administrador')
             ");
         }
     }

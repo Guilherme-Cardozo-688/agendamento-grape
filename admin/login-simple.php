@@ -5,25 +5,15 @@ ini_set('log_errors', 1);
 
 session_start();
 
-if (isset($_SESSION['admin_logado']) && $_SESSION['admin_logado'] === true) {
-    header('Location: dashboard.php');
-    exit;
-}
-
-try {
-    require_once __DIR__ . '/../config/database.php';
-} catch (Exception $e) {
-    error_log("Erro ao carregar database: " . $e->getMessage());
-    die("Erro ao carregar sistema. Verifique os logs do PHP.");
-}
-
 $erro = '';
 
 if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'] ?? '';
-    $senha = $_POST['senha'] ?? '';
-    
     try {
+        require_once __DIR__ . '/../config/database.php';
+        
+        $email = $_POST['email'] ?? '';
+        $senha = $_POST['senha'] ?? '';
+        
         $db = Database::getInstance()->getConnection();
         $stmt = $db->prepare("SELECT * FROM usuarios WHERE email = :email");
         $stmt->bindValue(':email', $email);
@@ -40,8 +30,8 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             $erro = 'Email ou senha incorretos';
         }
     } catch (Exception $e) {
+        $erro = 'Erro: ' . $e->getMessage();
         error_log("Erro no login: " . $e->getMessage());
-        $erro = 'Erro ao processar login. Tente novamente.';
     }
 }
 ?>
@@ -66,7 +56,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             <form method="POST" action="">
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" required value="admin@grapetech.com">
                 </div>
                 
                 <div class="form-group">

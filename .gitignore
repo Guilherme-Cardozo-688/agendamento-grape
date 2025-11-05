@@ -1,5 +1,7 @@
 # Chaves de API e credenciais
 config/credentials.php
+config/google-service-account.json
+config/google_token.json
 config/.env
 *.env
 .env.local

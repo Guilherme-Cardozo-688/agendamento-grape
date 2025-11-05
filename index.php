@@ -43,8 +43,9 @@ require_once __DIR__ . '/includes/functions.php';
                             </div>
                             
                             <div class="form-group">
-                                <label for="email">Email para notificações</label>
-                                <input type="email" id="email" name="email">
+                                <label for="email">Email para notificações *</label>
+                                <input type="email" id="email" name="email" required>
+                                <small style="color: #666;">Você receberá notificações sobre o status do seu agendamento</small>
                             </div>
                             
                             <div class="form-group">

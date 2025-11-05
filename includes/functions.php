@@ -118,21 +118,38 @@ function buscarAgendamentos($dataInicio = null, $dataFim = null, $status = null)
 }
 
 function formatarData($data) {
+    if (empty($data)) {
+        return '';
+    }
+    
     $dias = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
     $meses = ['', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 
               'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
     
     $timestamp = strtotime($data);
-    $diaSemana = $dias[date('w', $timestamp)];
+    if ($timestamp === false) {
+        return $data;
+    }
+    
+    $diaSemana = $dias[date('w', $timestamp)] ?? '';
     $dia = date('d', $timestamp);
-    $mes = $meses[date('n', $timestamp)];
+    $mes = $meses[date('n', $timestamp)] ?? '';
     $ano = date('Y', $timestamp);
     
     return "{$diaSemana}, {$dia} de {$mes} de {$ano}";
 }
 
 function formatarHorario($horario) {
-    return date('H:i', strtotime($horario));
+    if (empty($horario)) {
+        return '';
+    }
+    
+    $timestamp = strtotime($horario);
+    if ($timestamp === false) {
+        return $horario;
+    }
+    
+    return date('H:i', $timestamp);
 }
 
 function corStatus($status) {
